@@ -31,5 +31,7 @@ def create_app(test_config=None):
 
     from . import quiz
     app.register_blueprint(quiz.bp)
+    from . import search_artist as search
+    app.register_blueprint(search.bp)
 
     return app
