@@ -2,5 +2,16 @@
 <title>{{ title }}</title>
 <p>Fill in the Blank lyrics for {{band}}'s song!</p>
 <p>The song is "{{ song }}" off of their album {{ album }}!</p>
+
+<table>
+{% for col in lyrics_lst %}
+    <tr>
+    {% for word in col%}
+        <td>{{word}}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+
 <p>{{ lyrics }}</p>
 <p> {{ lyrics_lst }}</p>

@@ -5,6 +5,7 @@ from flask import (
 
 from azlyrics.azlyrics import artists, songs, lyrics
 import json
+import math
 import random
 
 bp = Blueprint('quiz', __name__, url_prefix='/quiz')
@@ -49,12 +50,13 @@ def organize_lyrics(lyrics_arr):
     lyrics_arr = lyrics_arr
     col_len = 50
     table = []
-    col = []
 
-    while lyrics_arr != []:
-        # TODO: Adjust indices, likely off by 1.
-        col = lyrics_arr[:50]
-        lyrics_arr = lyrics_arr[50:]
-        table.append(col)
+    for i in range(0,col_len):
+        table.append([])
+
+    row_num = 0
+    for lyric in lyrics_arr:
+        table[row_num].append(lyric)
+        row_num = (row_num + 1) % col_len
 
     return table
