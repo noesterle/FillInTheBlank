@@ -4,6 +4,17 @@ function showLyrics(element, textColor){
     element.style.color = textColor
 }
 
+function increaseScore() {
+    total_score = Number(document.getElementById('total').innerText)
+    curr_score_el = document.getElementById('score')
+    curr_score = curr_score_el.innerText
+    new_score = 1 + Number(curr_score)
+    curr_score_el.innerText = new_score
+
+    perc_el = document.getElementById('percentage')
+    perc_el.innerText = ((new_score/total_score)*100).toFixed(2)
+}
+
 /* Searching and revealing */
 function revealLyrics() {
     var elements = document.getElementsByClassName("lyric");
@@ -16,6 +27,7 @@ function revealLyrics() {
         if(lyric == text && elements[i].id == "hidden"){
             showLyrics(elements[i],"black")
             found = true
+            increaseScore()
         }
     }
     if(found){

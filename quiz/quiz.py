@@ -28,11 +28,11 @@ def quiz():
         song_lyrics_arr = lyrics(band, song)
         song_lyrics = song_lyrics_arr[0]
         song_lyrics_lst = sanitize_lyrics(song_lyrics)
-        song_lyrics_lst = organize_lyrics(song_lyrics_lst)
+        organized_lyrics = organize_lyrics(song_lyrics_lst)
     else:
         album = "N/A"
         song = "N/A"
-    return render_template("quiz.jinja", title="Fill In The Blank", band=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=song_lyrics_lst)
+    return render_template("quiz.jinja", title="Fill In The Blank", band=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
 
 def sanitize_lyrics(lyrics):
     # Clean data
