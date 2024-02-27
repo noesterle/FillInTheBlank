@@ -1,3 +1,10 @@
+function endGame() {
+	clearInterval(timerId);
+    document.getElementById('reveal').disabled = true;
+    revealAll();
+    document.getElementById('restart').style.visibility = "visible";
+}
+
 /*******  Timer *******/
 var distance = 900000; // 15 Min
 // Update the count down every 1 second
@@ -14,8 +21,7 @@ function TimerFunc() {
     
   // If the count down is over, write some text 
   if (distance < 0) {
-    clearInterval(countdown);
-    document.getElementById("demo").innerHTML = "EXPIRED";
+    endGame()
   }
   
   distance = distance - 1000;
@@ -33,6 +39,5 @@ play.addEventListener('click', function() {
 
 // Stopping the timer:
 quit.addEventListener('click', function() {
-	clearInterval(timerId);
-    revealAll();
+    endGame()
 });
