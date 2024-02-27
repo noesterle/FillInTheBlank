@@ -8,8 +8,11 @@
 <body>
     <script src="{{ url_for('static', filename='quiz.js') }}" type="text/javascript" ></script>
 
-    <p id=timer></p>
-    Enter a Lyric: <input id="reveal" type="text" onkeyup="revealLyrics()">
+    <p id=timer>15m 0s</p>
+    Enter a Lyric: <input id="reveal" type="text" onkeyup="revealLyrics()" disabled>
+    <button id="play">Play</button>
+    <button id="quit">Quit</button>
+    <script src="{{ url_for('static', filename='game.js') }}" type="text/javascript" ></script>
 
     <table>
     {% for col in lyrics_lst %}
