@@ -11,48 +11,35 @@ td, th {
   border: 1px solid black;
   text-align: left;
   padding: 8px;
-  /*color: white*/
+  color: white
 }
 
+/*
 tr:nth-child(even) {
   background-color: #dddddd;
-}
+} 
+*/
 </style>
-<p>Fill in the Blank lyrics for {{band}}'s song!</p>
-<p>The song is "{{ song }}" off of their album {{ album }}!</p>
+<head>
+    <p>Fill in the Blank lyrics for {{band}}'s song!</p>
+    <p>The song is "{{ song }}" off of their album {{ album }}!</p>
+</head>
+<body>
+    <script src="{{ url_for('static', filename='quiz.js') }}" type="text/javascript" ></script>
 
-<script>
-function revealLyrics() {
-    var elements = document.getElementsByClassName("lyric");
-    let lyric = ''
-    let found = false
-    for(var i=0; i<elements.length; i++) {
-        lyric = elements[i].dataset.lyric.toLowerCase()
-        text = document.getElementById('reveal').value.toLowerCase()
-        console.log(lyric + " " + text)
-        if(lyric == text && elements[i].id == "hidden"){
-            elements[i].innerText = elements[i].dataset.lyric
-            elements[i].id = "found"
-            found = true
-        }
-    }
-    if(found){
-        document.getElementById('reveal').value = ""
-    }
-}
-</script>
+    <p id=timer></p>
+    Enter a Lyric: <input id="reveal" type="text" onkeyup="revealLyrics()">
 
-Enter a Lyric: <input id="reveal" type="text" onkeyup="revealLyrics()">
-
-<table>
-{% for col in lyrics_lst %}
-    <tr>
-    {% for word in col%}
-        <td class="lyric" id="hidden" data-lyric="{{word}}"></td>
+    <table>
+    {% for col in lyrics_lst %}
+        <tr>
+        {% for word in col%}
+            <td class="lyric" id="hidden" data-lyric="{{word}}">X</td>
+        {% endfor %}
+        </tr>
     {% endfor %}
-    </tr>
-{% endfor %}
-</table>
+    </table>
 
-<p>{{ lyrics }}</p>
-<p> {{ lyrics_lst }}</p>
+    <p>{{ lyrics }}</p>
+    <p> {{ lyrics_lst }}</p>
+</body>
