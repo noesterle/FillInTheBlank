@@ -7,6 +7,7 @@ from azlyrics.azlyrics import artists, songs, lyrics
 import json
 import math
 import random
+import re
 
 bp = Blueprint('quiz', __name__, url_prefix='/')
 
@@ -39,10 +40,11 @@ def sanitize_lyrics(lyrics):
     lyrics = lyrics.replace("\r"," ").replace("\n"," ")
     # lyrics = ''.join(filter(str.isalpha or str.whitespace, lyrics))
     lst = lyrics.split(" ",)
-    lst = list(filter(lambda a: a != "", lst))
-    # TODO: Find a way to get rid of all punctuation. Except for apostrophes?.
+    for i in range(0,len(lst)):
+        lst[i] = re.sub(r'[^a-zA-Z0-9_\']+', '', lst[i])
     # TODO: Clean up words like "Ooh" -> "Oh"
 
+    lst = list(filter(lambda a: a != "", lst))
     print(lst)
     return lst
 
