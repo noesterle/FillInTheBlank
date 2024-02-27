@@ -17,7 +17,9 @@
       <span id="percentage">0</span>%
     </div>
     <script src="{{ url_for('static', filename='game.js') }}" type="text/javascript" ></script>
-
+    <div>
+      <a id="restart" href="./search" style="visibility:hidden">Play Again!</a>
+    </div>
     <table>
     {% for col in lyrics_lst %}
         <tr>
@@ -28,6 +30,5 @@
     {% endfor %}
     </table>
 
-    <p>{{ lyrics }}</p>
-    <p> {{ lyrics_lst }}</p>
+    <p style="visibility:collapse">{{ lyrics }}</p>
 </body>
