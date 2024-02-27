@@ -14,11 +14,9 @@ bp = Blueprint('quiz', __name__, url_prefix='/')
 @bp.route("/start", methods={'POST'})
 def quiz():
     band = request.form['search']
-    print(band[0])
 
     artists_by_letter= json.loads(artists(band[0]))
     is_band = band in artists_by_letter
-    print(is_band)
 
     if is_band:
         songs_by_album = json.loads(songs(band))
@@ -45,7 +43,6 @@ def sanitize_lyrics(lyrics):
     # TODO: Clean up words like "Ooh" -> "Oh"
 
     lst = list(filter(lambda a: a != "", lst))
-    print(lst)
     return lst
 
 def organize_lyrics(lyrics_arr):
