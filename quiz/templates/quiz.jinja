@@ -8,17 +8,15 @@ table {
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid black;
   text-align: left;
   padding: 8px;
   /*color: white*/
 }
 
-/*
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-*/
 </style>
 <p>Fill in the Blank lyrics for {{band}}'s song!</p>
 <p>The song is "{{ song }}" off of their album {{ album }}!</p>
@@ -29,11 +27,11 @@ function revealLyrics() {
     let lyric = ''
     let found = false
     for(var i=0; i<elements.length; i++) {
-        lyric = elements[i].innerText
-        text = document.getElementById('reveal').value
+        lyric = elements[i].dataset.lyric.toLowerCase()
+        text = document.getElementById('reveal').value.toLowerCase()
         console.log(lyric + " " + text)
         if(lyric == text && elements[i].id == "hidden"){
-            elements[i].style.color = 'red';
+            elements[i].innerText = elements[i].dataset.lyric
             elements[i].id = "found"
             found = true
         }
@@ -44,13 +42,13 @@ function revealLyrics() {
 }
 </script>
 
-<input id="reveal" type="text" onkeyup="revealLyrics()">
+Enter a Lyric: <input id="reveal" type="text" onkeyup="revealLyrics()">
 
 <table>
 {% for col in lyrics_lst %}
     <tr>
     {% for word in col%}
-        <td class="lyric" id="hidden">{{word}}</td>
+        <td class="lyric" id="hidden" data-lyric="{{word}}"></td>
     {% endfor %}
     </tr>
 {% endfor %}
