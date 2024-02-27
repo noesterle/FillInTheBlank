@@ -8,7 +8,7 @@ import json
 import math
 import random
 
-bp = Blueprint('quiz', __name__, url_prefix='/quiz')
+bp = Blueprint('quiz', __name__, url_prefix='/')
 
 @bp.route("/start", methods={'POST'})
 def quiz():
