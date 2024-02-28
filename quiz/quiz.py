@@ -2,6 +2,7 @@ import functools
 from flask import (
     abort, Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
+from .sanitize import sanitize_artist
 
 from azlyrics.azlyrics import artists, songs, lyrics
 import json
@@ -20,6 +21,8 @@ def quiz():
     for artist in artists_by_letter:
         if band.lower() == artist.lower():
             is_band = True
+            sanitized_band = sanitize_artist(band)
+    band = sanitized_band
 
     if is_band:
         songs_by_album = json.loads(songs(band))
