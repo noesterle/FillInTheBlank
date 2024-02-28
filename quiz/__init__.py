@@ -34,4 +34,7 @@ def create_app(test_config=None):
     from . import search_artist as search
     app.register_blueprint(search.bp)
 
+    from . import error
+    app.register_error_handler(404, error.page_not_found)
+
     return app

@@ -1,6 +1,6 @@
 import functools
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    abort, Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 
 from azlyrics.azlyrics import artists, songs, lyrics
@@ -25,6 +25,8 @@ def quiz():
         song = random.choice(songs_by_album['albums'][album])
 
         song_lyrics_arr = lyrics(band, song)
+        if type(song_lyrics_arr) == dict and 'Error' in song_lyrics_arr:
+            abort(404, description=song_lyrics_arr['Error'])
         song_lyrics = song_lyrics_arr[0]
         song_lyrics_lst = sanitize_lyrics(song_lyrics)
         organized_lyrics = organize_lyrics(song_lyrics_lst)
