@@ -15,28 +15,42 @@ bp = Blueprint('quiz', __name__, url_prefix='/')
 @bp.route("/start", methods={'POST'})
 def quiz():
     band = request.form['search']
+    print("Searching for band:", band)
 
     artists_by_letter= json.loads(artists(band[0]))
+    print("Artists By Letter: ", artists_by_letter)
     is_band = False
+    sanitized_band = ''
     for artist in artists_by_letter:
         if band.lower() == artist.lower():
+            print("Found band %s on AZLyrics." % (band))
             is_band = True
             sanitized_band = sanitize_artist(band)
+    print("Pre-Sanitized Band name:", band)
     band = sanitized_band
+    print("Sanitized Band name:", band)
 
     if is_band:
+        print("Searching for all songs.")
         songs_by_album = json.loads(songs(band))
         
         album = random.choice(list(songs_by_album['albums']))
+        print("Random Album:", album)
         song = random.choice(songs_by_album['albums'][album])
+        print("Random Song:", song)
 
         song_lyrics_arr = lyrics(band, song)
         if type(song_lyrics_arr) == dict and 'Error' in song_lyrics_arr:
+            print("Error", song_lyrics_arr)
             abort(404, description=song_lyrics_arr['Error'])
         song_lyrics = song_lyrics_arr[0]
+        print("Retrieved song lyrics")
         song_lyrics_lst = sanitize_lyrics(song_lyrics)
+        print("Sanitized song lyrics.")
         organized_lyrics = organize_lyrics(song_lyrics_lst)
+        print("Organized song lyrics.")
     else:
+        print("Did not find Band %s on AZLyrics." % (band))
         abort(404,description="Artist " + band + " was not found.")
     return render_template("quiz.jinja", title="Fill In The Blank", band=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
 
