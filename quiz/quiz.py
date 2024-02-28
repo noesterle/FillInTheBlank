@@ -16,7 +16,10 @@ def quiz():
     band = request.form['search']
 
     artists_by_letter= json.loads(artists(band[0]))
-    is_band = band in artists_by_letter
+    is_band = False
+    for artist in artists_by_letter:
+        if band.lower() == artist.lower():
+            is_band = True
 
     if is_band:
         songs_by_album = json.loads(songs(band))
@@ -31,8 +34,7 @@ def quiz():
         song_lyrics_lst = sanitize_lyrics(song_lyrics)
         organized_lyrics = organize_lyrics(song_lyrics_lst)
     else:
-        album = "N/A"
-        song = "N/A"
+        abort(404,description="Artist " + band + " was not found.")
     return render_template("quiz.jinja", title="Fill In The Blank", band=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
 
 def sanitize_lyrics(lyrics):
