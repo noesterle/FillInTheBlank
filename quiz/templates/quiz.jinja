@@ -3,7 +3,8 @@
 <head>
   <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
   <p>Fill in the Blank lyrics for {{band}}'s song!</p>
-  <p>The song is "{{ song }}" off of their album {{ album }}!</p>
+  <button id="show_hint_title">Click to show Song and Album</button>
+  <p id="hint_title" style="display:none">The song is "{{ song }}" off of their album {{ album }}!</p>
 </head>
 <body>
     <script src="{{ url_for('static', filename='quiz.js') }}" type="text/javascript" ></script>

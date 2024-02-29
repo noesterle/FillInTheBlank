@@ -31,6 +31,7 @@ function TimerFunc() {
 let timerId = ''
 let play = document.querySelector('#play');
 let quit  = document.querySelector('#quit');
+let hint_title = document.querySelector('#show_hint_title');
 
 play.addEventListener('click', function() {
 	timerId = setInterval(TimerFunc(), 1000);
@@ -40,4 +41,9 @@ play.addEventListener('click', function() {
 // Stopping the timer:
 quit.addEventListener('click', function() {
     endGame()
+});
+
+hint_title.addEventListener('click', function() {
+    document.getElementById('hint_title').style.display = "inline";
+    document.getElementById('show_hint_title').style.display = "none";
 });
