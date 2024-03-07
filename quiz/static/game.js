@@ -3,6 +3,7 @@ function endGame() {
     document.getElementById('reveal').disabled = true;
     revealAll();
     document.getElementById('restart').style.visibility = "visible";
+    document.getElementById('restart-same-artist').style.visibility = "visible";
 }
 
 /*******  Timer *******/

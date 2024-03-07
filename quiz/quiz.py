@@ -27,19 +27,18 @@ def quiz():
             is_band = True
             sanitized_band = sanitize_artist(band)
     print("Pre-Sanitized Band name:", band)
-    band = sanitized_band
-    print("Sanitized Band name:", band)
+    print("Sanitized Band name:", sanitized_band)
 
     if is_band:
         print("Searching for all songs.")
-        songs_by_album = json.loads(songs(band))
+        songs_by_album = json.loads(songs(sanitized_band))
         
         album = random.choice(list(songs_by_album['albums']))
         print("Random Album:", album)
         song = random.choice(songs_by_album['albums'][album])
         print("Random Song:", song)
 
-        song_lyrics_arr = lyrics(band, song)
+        song_lyrics_arr = lyrics(sanitized_band, song)
         if type(song_lyrics_arr) == dict and 'Error' in song_lyrics_arr:
             print("Error", song_lyrics_arr)
             abort(404, description=song_lyrics_arr['Error'])
@@ -50,9 +49,9 @@ def quiz():
         organized_lyrics = organize_lyrics(song_lyrics_lst)
         print("Organized song lyrics.")
     else:
-        print("Did not find Band %s on AZLyrics." % (band))
-        abort(404,description="Artist " + band + " was not found.")
-    return render_template("quiz.jinja", title="Fill In The Blank", band=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
+        print("Did not find Band %s on AZLyrics." % (sanitized_band))
+        abort(404,description="Artist " + sanitized_band + " was not found.")
+    return render_template("quiz.jinja", title="Fill In The Blank", band_azlyrics=sanitized_band, band_search=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
 
 def sanitize_lyrics(lyrics):
     # Clean data
