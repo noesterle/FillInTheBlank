@@ -21,7 +21,7 @@
     <div>
       <a id="restart" href="./search" style="visibility:hidden">Play Again with a New Artist!</a>
       <form id="myform" method="post" action="./start">
-        <a id="restart-same-artist" onclick="document.getElementById('myform').submit();" style="visibility:hidden; color: #0000EE; text-decoration: underline">Play Again with the Same Artist!</a>
+        <a id="restart-same-artist" class="restart-same-artist" onclick="document.getElementById('myform').submit();">Play Again with the Same Artist!</a>
         <input type="text" class="form-control" name="search" id="search"  placeholder="Band" value="{{band_search}}" style="visibility:collapse"/>
       </form>
     </div>

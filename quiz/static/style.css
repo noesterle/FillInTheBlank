@@ -10,6 +10,12 @@ table {
     padding: 8px;
     color: white
   }
+
+  .restart-same-artist {
+    visibility:hidden; 
+    color: #0000EE; 
+    text-decoration: underline;
+  }
   
   /*
   tr:nth-child(even) {
