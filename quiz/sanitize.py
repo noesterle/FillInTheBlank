@@ -5,3 +5,7 @@ def sanitize_artist(artist):
     if artist.lower() == "ghost":
         artist = "ghostbc"
     return artist
+
+def sanitize_song(song):
+    song = re.sub('[^0-9a-zA-Z]+', '', song)
+    return song

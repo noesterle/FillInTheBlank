@@ -2,7 +2,7 @@ import functools
 from flask import (
     abort, Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from .sanitize import sanitize_artist
+from .sanitize import sanitize_artist, sanitize_song
 
 from azlyrics.azlyrics import artists, songs, lyrics
 import json
@@ -37,8 +37,9 @@ def quiz():
         print("Random Album:", album)
         song = random.choice(songs_by_album['albums'][album])
         print("Random Song:", song)
+        sanitized_song = sanitize_song(song)
 
-        song_lyrics_arr = lyrics(sanitized_band, song)
+        song_lyrics_arr = lyrics(sanitized_band, sanitized_song)
         if type(song_lyrics_arr) == dict and 'Error' in song_lyrics_arr:
             print("Error", song_lyrics_arr)
             abort(404, description=song_lyrics_arr['Error'])
