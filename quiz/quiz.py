@@ -2,7 +2,7 @@ import functools
 from flask import (
     abort, Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from .sanitize import sanitize_artist, sanitize_song
+from .sanitize import sanitize_artist, sanitize_song, sanitize_lyrics
 
 from azlyrics.azlyrics import artists, songs, lyrics
 import json
@@ -53,18 +53,6 @@ def quiz():
         print("Did not find Band %s on AZLyrics." % (sanitized_band))
         abort(404,description="Artist " + sanitized_band + " was not found.")
     return render_template("quiz.jinja", title="Fill In The Blank", band_azlyrics=sanitized_band, band_search=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
-
-def sanitize_lyrics(lyrics):
-    # Clean data
-    lyrics = lyrics.replace("\r"," ").replace("\n"," ")
-    # lyrics = ''.join(filter(str.isalpha or str.whitespace, lyrics))
-    lst = lyrics.split(" ",)
-    for i in range(0,len(lst)):
-        lst[i] = re.sub(r'[^a-zA-Z0-9_\']+', '', lst[i])
-    # TODO: Clean up words like "Ooh" -> "Oh"
-
-    lst = list(filter(lambda a: a != "", lst))
-    return lst
 
 def organize_lyrics(lyrics_arr):
     lyrics_arr = lyrics_arr
