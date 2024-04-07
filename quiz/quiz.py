@@ -12,6 +12,9 @@ import re
 
 bp = Blueprint('quiz', __name__, url_prefix='/')
 
+recent_songs = []
+max_number_of_recent_songs = 5
+
 @bp.route("/start", methods={'POST'})
 def quiz():
     band = request.form['search']
@@ -35,8 +38,23 @@ def quiz():
         
         album = random.choice(list(songs_by_album['albums']))
         print("Random Album:", album)
-        song = random.choice(songs_by_album['albums'][album])
+
+        get_new_song = True
+        while (get_new_song):
+            song = random.choice(songs_by_album['albums'][album])
+            print("Potential Song", song)
+            print(recent_songs)
+            if song not in recent_songs:
+                get_new_song = False
+                if len(recent_songs) >= max_number_of_recent_songs:
+                    recent_songs.pop(0)
+                recent_songs.append(song)
+
+
         print("Random Song:", song)
+
+
+
         sanitized_song = sanitize_song(song)
 
         song_lyrics_arr = lyrics(sanitized_band, sanitized_song)
