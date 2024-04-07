@@ -70,7 +70,7 @@ def quiz():
     else:
         print("Did not find Band %s on AZLyrics." % (sanitized_band))
         abort(404,description="Artist " + sanitized_band + " was not found.")
-    return render_template("quiz.jinja", title="Fill In The Blank", band_azlyrics=sanitized_band, band_search=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
+    return render_template("quiz.jinja", title="Fill In The Blank", page="Lyrics Quiz", band_azlyrics=sanitized_band, band_search=band, album=album, song=song, lyrics=song_lyrics, lyrics_lst=organized_lyrics, total_lyrics=len(song_lyrics_lst))
 
 def organize_lyrics(lyrics_arr):
     lyrics_arr = lyrics_arr

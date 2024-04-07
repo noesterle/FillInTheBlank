@@ -1,7 +1,6 @@
-function showLyrics(element, textColor){
+function showLyrics(element, id){
     element.innerText = element.dataset.lyric
-    element.id = "revealed"
-    element.style.color = textColor
+    element.id = id
 }
 
 function increaseScore() {
@@ -25,7 +24,7 @@ function revealLyrics() {
         text = document.getElementById('reveal').value.toLowerCase()
         console.log(lyric + " " + text)
         if(lyric == text && elements[i].id == "hidden"){
-            showLyrics(elements[i],"black")
+            showLyrics(elements[i], "revealed")
             found = true
             increaseScore()
         }
@@ -39,7 +38,7 @@ function revealAll() {
     var elements = document.getElementsByClassName("lyric");
     for(var i=0; i<elements.length; i++) {
         if(elements[i].id == "hidden"){
-            showLyrics(elements[i],"red")
+            showLyrics(elements[i],"lose")
         }
     }
 }

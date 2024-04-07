@@ -7,7 +7,7 @@ bp = Blueprint('search', __name__, url_prefix='/')
 
 @bp.route("/search", methods={'GET'})
 def quiz():
-    return render_template("search.jinja", title="Artist Search")
+    return render_template("search.jinja", title="Fill In The Blank", page="Artist Search")
 
 @bp.route("/", methods={'GET'})
 def root():
