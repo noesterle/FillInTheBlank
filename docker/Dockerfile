@@ -6,7 +6,7 @@ COPY quiz/ ./quiz/
 COPY Pipfile .
 COPY Pipfile.lock .
 
-RUN apt update && apt upgrade && apt install -y git
+RUN apt update && apt upgrade -y && apt install -y git
 RUN python -m pip install pipenv
 
 RUN pipenv sync
