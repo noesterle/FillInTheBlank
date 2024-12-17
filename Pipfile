@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-azlyrics = {editable = true, ref = "master", git = "git+https://github.com/noesterle/azlyrics.git"}
 flask = "3.0.2 "
 waitress = "3.0.0"
+azlyrics = {editable = true, git = "https://github.com/noesterle/azlyrics"}
 
 [dev-packages]
 
